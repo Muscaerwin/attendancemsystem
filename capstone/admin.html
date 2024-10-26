@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts for playful style -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+    
+    <title>Fun Admin Panel for Kids</title>
+
+    <style>
+        body {
+            background-image: url('img/appointment.jpg'); /* Use a fun, colorful background */
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: 'Baloo 2', cursive; /* Fun and friendly font */
+            color: #333;
+        }
+
+        #sidebar {
+            background-color: #ffcc00;
+            padding: 20px;
+            width: 250px;
+            position: fixed;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            top: 0;
+            left: 0;
+        }
+
+        #sidebar a.brand {
+            font-size: 28px;
+            color: #ff5733;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        #sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            background-color: #ffdd33;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        #sidebar ul li a:hover {
+            background-color: #ff9933;
+        }
+
+        #sidebar ul li a i {
+            margin-right: 10px;
+        }
+
+        #content {
+            margin-left: 270px; /* Space for sidebar */
+            padding: 20px;
+            position: relative;
+        }
+
+        main {
+            color: #333; /* Default text color for main content */
+            text-align: center;
+        }
+
+        .head-title h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #FFD700; /* Gold */
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        ul.box-info {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        ul.box-info li {
+            background-color: #ffffffdd;
+            border-radius: 20px;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        ul.box-info li:hover {
+            transform: scale(1.05);
+        }
+
+        ul.box-info li i {
+            font-size: 3rem;
+            color: #ff6347; /* Tomato */
+        }
+
+        ul.box-info li .text h3 {
+            font-size: 2rem;
+            color: #000; /* Text color for headings inside box-info */
+        }
+
+        ul.box-info li .text p {
+            font-size: 1.2rem;
+            color: #333; /* Text color for paragraphs inside box-info */
+        }
+
+        /* Styling for product table and form */
+        .table-data {
+            margin-top: 40px;
+            background-color: #ffccff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .table-data h3 {
+            font-size: 30px;
+            color: #cc0099;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-product-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .add-product-form .box {
+            width: 48%; /* Set form elements to take half-width */
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ff99cc;
+        }
+
+        .add-product-form input[type="file"] {
+            padding: 5px;
+            background-color: white;
+        }
+
+        table {
+            width: 100%;
+            background-color: #ffffff;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 15px;
+            border: 2px solid #ff99cc;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #ffccff;
+            color: #333; /* Text color for table headers */
+        }
+
+        table td {
+            color: #333; /* Text color for table data cells */
+        }
+
+        table img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+
+        .btn {
+            background-color: #ff6699;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ff3366;
+        }
+
+        .delete-btn {
+            background-color: #ff4f6a;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff0033;
+        }
+
+        /* Add color to empty row in the table */
+        .table-data .empty {
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bxs-happy-heart'></i>
+        <span class="text">Fun Admin</span>
+    </a>
+    <ul class="side-menu top">
+        <li class="active">
+            <a href="#">
+                <i class='bx bxs-dashboard'></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-user'></i>
+                <span class="text">Users</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-cart'></i>
+                <span class="text">Announcement</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="logout">
+                <i class='bx bxs-log-out'></i>
+                <span class="text">Logout</span>
+            </a>
+        </li>
+    </ul>
+</section>
+
+<section id="content">
+    <main>
+        <div class="head-title">
+            <h1>Welcome, Kiddo!</h1>
+        </div>
+
+        <ul class="box-info">
+            <li>
+                <i class='bx bxs-calendar-check'></i>
+                <span class="text">
+                    <h3>1020</h3>
+                    <p>Appointments</p>
+                </span>
+            </li>
+            <li>
+                <i class='bx bxs-group'></i>
+                <span class="text">
+                    <h3>150</h3>
+                    <p>Students</p>
+                </span>
+            </li>
+            <li>
+                <i class='bx bxs-dollar-circle'></i>
+                <span class="text">
+                    <h3>$2543</h3>
+                    <p>Emails</p>
+                </span>
+            </li>
+        </ul>
+
+        <div class="table-data">
+            <h3>Manage Members</h3>
+            
+            <form method="post" enctype="multipart/form-data" class="add-product-form">
+                <input type="text" name="p_name" placeholder="Student Name" class="box" required>
+                <input type="number" name="p_price" min="0" placeholder="Grades" class="box" required>
+                <input type="text" name="p_sizes" placeholder="Grades" class="box" required>
+                <input type="text" name="p_color" placeholder="Action" class="box" required> 
+                <input type="file" name="p_image" accept="image/png, image/jpg, image/jpeg" class="box" required> 
+                <input type="submit" value="Add Members" class="btn">
+            </form>
+
+            <table> 
+                <thead>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Grades</th>
+                    <th>Grades</th>
+                    <th>Results</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src='img/classes-1.jpg' alt='Product Image'></td>
+                        <td>Fun Toy</td>
+                        <td>88</td>
+                        <td>88</td>
+                        <td>79</td>
+                        <td>
+                            <button class="btn">Update</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Placeholder for empty product list -->
+                    <tr>
+                        <td colspan='6' class='empty'>No products added yet!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</section>
+
+</body>
+</html>
